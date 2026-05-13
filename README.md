@@ -1,86 +1,105 @@
-# Git & GitHub Complete Troubleshooting Guide
-
-# Beginner to DevOps Engineer Level Documentation
+# Git & GitHub Deep Dive
+# Complete Beginner to Advanced DevOps Guide
 
 ---
 
 # Introduction
 
-Git and GitHub are the backbone of modern DevOps, software development, CI/CD pipelines, and infrastructure automation.
+Git is one of the most important tools in the DevOps world.
 
-Every DevOps engineer uses Git daily for:
+Almost every company uses Git for:
+- source code management
+- CI/CD pipelines
+- Kubernetes manifests
+- Infrastructure as Code
+- Jenkins pipelines
+- automation scripts
+- collaboration
 
-* source code management
-* version control
-* infrastructure as code
-* Kubernetes manifests
-* Jenkins pipelines
-* automation scripts
-* team collaboration
+Without Git:
+- tracking changes becomes difficult
+- collaboration becomes risky
+- rollback becomes nearly impossible
 
-This guide covers:
-
-* Git basics
-* GitHub configuration
-* authentication setup
-* push/pull workflow
-* common errors
-* troubleshooting
-* production-level understanding
-
-Goal:
-
-* Teach absolute beginners
-* Explain internal Git behavior
-* Build interview-level understanding
-* Solve real-world Git issues
+Git helps engineers:
+- store history
+- track changes
+- collaborate safely
+- revert mistakes
+- manage versions
 
 ---
 
 # What is Git?
 
-Git is a distributed version control system.
+Git is a Distributed Version Control System (DVCS).
 
 Git tracks:
+- file changes
+- code history
+- commits
+- branches
+- collaboration
 
-* file changes
-* code history
-* commits
-* collaboration
-* versions
+Git allows multiple engineers to work safely on same project.
 
-Git helps developers:
+---
 
-* revert changes
-* collaborate safely
-* maintain project history
-* prevent data loss
+# What is Version Control?
+
+Version control means:
+
+```text
+Managing different versions of files and tracking changes over time.
+```
+
+Example:
+- Version 1
+- Version 2
+- Version 3
+
+Git stores all versions internally.
+
+---
+
+# Why Git is Important
+
+Without Git:
+- files get overwritten
+- no rollback possible
+- teamwork becomes dangerous
+- history gets lost
+
+Git solves:
+- collaboration problems
+- rollback problems
+- tracking problems
+- deployment consistency
 
 ---
 
 # What is GitHub?
 
-GitHub is a cloud platform used to host Git repositories.
+GitHub is cloud platform used to host Git repositories online.
 
 GitHub provides:
-
-* remote repository hosting
-* collaboration
-* CI/CD integrations
-* pull requests
-* code review
-* issue tracking
+- remote repositories
+- collaboration
+- pull requests
+- issue tracking
+- CI/CD integrations
+- automation workflows
 
 ---
 
 # Difference Between Git and GitHub
 
-| Git                  | GitHub                 |
-| -------------------- | ---------------------- |
-| Version control tool | Cloud hosting platform |
-| Works locally        | Works online           |
-| Tracks changes       | Stores repositories    |
-| CLI software         | Web platform           |
+| Git | GitHub |
+|---|---|
+| Local version control tool | Online hosting platform |
+| Tracks changes | Stores repositories online |
+| Command line tool | Web platform |
+| Works offline | Requires internet |
 
 ---
 
@@ -92,7 +111,7 @@ Check Git version:
 git --version
 ```
 
-Example output:
+Example:
 
 ```text
 git version 2.43.0
@@ -100,9 +119,7 @@ git version 2.43.0
 
 ---
 
-# Configure Git Username and Email
-
-## Set Username
+# Configure Git Username
 
 ```bash
 git config --global user.name "muskan7860"
@@ -110,7 +127,7 @@ git config --global user.name "muskan7860"
 
 ---
 
-## Set Email
+# Configure Git Email
 
 ```bash
 git config --global user.email "muskanpatel914@gmail.com"
@@ -118,13 +135,13 @@ git config --global user.email "muskanpatel914@gmail.com"
 
 ---
 
-## Verify Configuration
+# Verify Configuration
 
 ```bash
 git config --global --list
 ```
 
-Example output:
+Output:
 
 ```text
 user.name=muskan7860
@@ -138,7 +155,7 @@ user.email=muskanpatel914@gmail.com
 `--global` means:
 
 ```text
-Apply configuration for all repositories of current user.
+Apply configuration to all repositories for current user.
 ```
 
 Configuration stored inside:
@@ -149,16 +166,16 @@ Configuration stored inside:
 
 ---
 
-# Create Project Directory
+# Create Git Repository
 
 ```bash
-mkdir shell-scripting
-cd shell-scripting
+mkdir git-project
+cd git-project
 ```
 
 ---
 
-# Initialize Git Repository
+# Initialize Git
 
 ```bash
 git init
@@ -174,23 +191,22 @@ Initialized empty Git repository
 
 # What Happens Internally During git init
 
-Git creates hidden folder:
+Git creates hidden directory:
 
 ```text
 .git
 ```
 
-This contains:
-
-* commit history
-* branches
-* objects
-* metadata
-* configurations
+Contains:
+- commit history
+- branches
+- configurations
+- metadata
+- Git objects
 
 ---
 
-# Check Hidden Files
+# View Hidden Files
 
 ```bash
 ls -la
@@ -206,7 +222,38 @@ touch README.md
 
 ---
 
-# Add Files to Git Staging Area
+# Check Git Status
+
+```bash
+git status
+```
+
+Shows:
+- modified files
+- staged files
+- untracked files
+- current branch
+
+---
+
+# Understanding Untracked Files
+
+Example:
+
+```text
+Untracked files:
+README.md
+```
+
+Meaning:
+
+```text
+Git sees file but is not tracking it yet.
+```
+
+---
+
+# Add Files to Staging Area
 
 ```bash
 git add .
@@ -222,38 +269,48 @@ Track all current file changes.
 
 # What is Staging Area?
 
-Git has 3 areas:
+Git has 3 major areas:
 
-| Area              | Purpose           |
-| ----------------- | ----------------- |
-| Working Directory | current files     |
-| Staging Area      | prepared changes  |
-| Repository        | committed history |
+| Area | Purpose |
+|---|---|
+| Working Directory | current files |
+| Staging Area | prepared changes |
+| Repository | committed history |
 
 ---
 
 # Commit Changes
 
 ```bash
-git commit -m "Added Day 01 notes"
+git commit -m "Added README file"
 ```
 
 ---
 
 # What is Commit?
 
-Commit is:
+Commit is snapshot of project at specific time.
 
-```text
-Snapshot of project at specific point in time.
+Commit contains:
+- changes
+- timestamp
+- author
+- commit message
+- unique ID
+
+---
+
+# Check Commit History
+
+```bash
+git log
 ```
 
-Each commit has:
+Compact format:
 
-* unique ID
-* author
-* timestamp
-* message
+```bash
+git log --oneline
+```
 
 ---
 
@@ -261,22 +318,17 @@ Each commit has:
 
 Open:
 
-[https://github.com](https://github.com)
+https://github.com
 
 Create repository:
-
-Example:
-
-```text
-DeepDive_Shell_Script
-```
+- Git-DeepDive
 
 ---
 
-# Connect Local Repo to GitHub
+# Add Remote Repository
 
 ```bash
-git remote add origin https://github.com/muskan7860/DeepDive_Shell_Script.git
+git remote add origin https://github.com/muskan7860/Git-DeepDive.git
 ```
 
 ---
@@ -285,10 +337,44 @@ git remote add origin https://github.com/muskan7860/DeepDive_Shell_Script.git
 
 `origin` is nickname for remote repository.
 
-Check remote:
+---
+
+# Verify Remote
 
 ```bash
 git remote -v
+```
+
+---
+
+# Understanding Branches
+
+Branch means:
+
+```text
+Independent line of development.
+```
+
+Default branch commonly:
+- main
+
+Older Git versions:
+- master
+
+---
+
+# Check Current Branch
+
+```bash
+git branch
+```
+
+---
+
+# Rename Branch to main
+
+```bash
+git branch -M main
 ```
 
 ---
@@ -303,18 +389,45 @@ git push -u origin main
 
 # Meaning of Push Command
 
-| Part     | Meaning               |
-| -------- | --------------------- |
-| git push | upload commits        |
-| -u       | set upstream tracking |
-| origin   | remote repository     |
-| main     | branch                |
+| Part | Meaning |
+|---|---|
+| git push | upload commits |
+| -u | set upstream tracking |
+| origin | remote repository |
+| main | branch name |
 
 ---
 
-# Configure Credential Storage
+# Pull Latest Changes
 
-To avoid entering username/password every time:
+```bash
+git pull
+```
+
+Downloads latest remote changes.
+
+---
+
+# Difference Between Pull and Push
+
+| Command | Purpose |
+|---|---|
+| git pull | download changes |
+| git push | upload changes |
+
+---
+
+# Clone Repository
+
+```bash
+git clone https://github.com/USERNAME/REPO.git
+```
+
+---
+
+# Git Credential Configuration
+
+To avoid entering credentials repeatedly:
 
 ```bash
 git config --global credential.helper store
@@ -322,11 +435,9 @@ git config --global credential.helper store
 
 ---
 
-# What Does Credential Helper Do?
+# What Happens Internally
 
-Git stores credentials locally.
-
-Stored inside:
+Git stores credentials inside:
 
 ```text
 ~/.git-credentials
@@ -334,15 +445,12 @@ Stored inside:
 
 ---
 
-# Important GitHub Authentication Note
+# Important GitHub Authentication Understanding
 
 GitHub no longer accepts account password for Git operations.
 
 Instead use:
-
-```text
-Personal Access Token (PAT)
-```
+- Personal Access Token (PAT)
 
 ---
 
@@ -350,247 +458,84 @@ Personal Access Token (PAT)
 
 Open:
 
-[https://github.com/settings/tokens](https://github.com/settings/tokens)
+https://github.com/settings/tokens
 
 Steps:
-
-* Generate new token
-* Select repo permission
-* Generate token
-* Copy token
+- Generate token
+- Select repo permissions
+- Copy token
 
 ---
 
-# Use Token as Password
+# During Push
 
-During push:
+Git asks:
 
 ```text
-Username: muskan7860
-Password: <paste token>
+Username:
+Password:
 ```
+
+Use:
+
+| Field | Value |
+|---|---|
+| Username | GitHub username |
+| Password | Personal Access Token |
 
 NOT GitHub account password.
 
 ---
 
-# Daily Git Workflow
-
-```bash
-git pull
-
-git add .
-
-git commit -m "Added Day 02 variables"
-
-git push
-```
-
----
-
-# Common Git Errors and Fixes
+# Common Errors and Fixes
 
 ---
 
 # ERROR 1
-
-# Permission Denied While Creating Directory
-
-Error:
-
-```text
-mkdir: cannot create directory: Permission denied
-```
-
-Cause:
-
-Trying to create directory inside protected location.
-
-Example:
-
-```bash
-mkdir /home/shell-scripting
-```
-
----
-
-# Fix
-
-Use home directory:
-
-```bash
-cd ~
-mkdir shell-scripting
-```
-
----
-
-# ERROR 2
-
-# bash: ./script.sh: Permission denied
-
-Cause:
-
-Script lacks execute permission.
-
----
-
-# Fix
-
-```bash
-chmod +x script.sh
-```
-
-Then:
-
-```bash
-./script.sh
-```
-
----
-
-# Why Execute Permission Needed?
-
-Linux needs execute permission to run file as program.
-
-Without execute permission:
-
-* treated as normal text file
-
----
-
-# ERROR 3
-
-# command not found in Variables
-
-Example:
-
-```bash
-name = Muskan
-```
+# src refspec main does not match any
 
 Error:
 
 ```text
-command not found
+error: src refspec main does not match any
 ```
 
 ---
 
 # Cause
 
-Spaces around '='.
+Local branch is:
+- master
 
-Bash interprets:
-
-| Part   | Meaning  |
-| ------ | -------- |
-| name   | command  |
-| =      | argument |
-| Muskan | argument |
+But pushing:
+- main
 
 ---
 
-# Fix
-
-Correct syntax:
+# Check Current Branch
 
 ```bash
-name="Muskan"
+git branch
 ```
 
 ---
 
-# ERROR 4
+# Fix Option 1
 
-# Variable Not Printing
-
-Example:
+Push master:
 
 ```bash
-Last_Name="Patel"
-echo $Last_name
+git push -u origin master
 ```
 
 ---
 
-# Cause
+# Fix Option 2 (Recommended)
 
-Bash variables are case-sensitive.
-
-Different:
-
-```text
-Last_Name
-Last_name
-```
-
----
-
-# Fix
-
-Use exact variable name:
+Rename branch:
 
 ```bash
-echo $Last_Name
-```
-
----
-
-# ERROR 5
-
-# Newline Not Working
-
-Example:
-
-```bash
-echo "Hello\nWorld"
-```
-
----
-
-# Cause
-
-Default echo does not interpret escape characters.
-
----
-
-# Fix
-
-```bash
-echo -e "Hello\nWorld"
-```
-
----
-
-# ERROR 6
-
-# Push Rejected (fetch first)
-
-Error:
-
-```text
-! [rejected] main -> main (fetch first)
-```
-
----
-
-# Cause
-
-Remote repository contains commits not present locally.
-
-Usually happens when:
-
-* README created on GitHub
-* another user pushed changes
-* repository histories differ
-
----
-
-# Fix
-
-```bash
-git pull origin main --allow-unrelated-histories --no-rebase
+git branch -M main
 ```
 
 Then:
@@ -601,27 +546,52 @@ git push -u origin main
 
 ---
 
-# ERROR 7
+# ERROR 2
+# remote origin already exists
 
-# divergent branches
+Cause:
+- remote already configured
 
-Error:
+---
 
-```text
-Need to specify how to reconcile divergent branches
+# Check Existing Remote
+
+```bash
+git remote -v
 ```
 
 ---
 
-# Meaning
+# Fix
 
-Local and remote repositories both contain separate commits.
+Remove old remote:
 
-Git asks:
+```bash
+git remote remove origin
+```
+
+Add again:
+
+```bash
+git remote add origin REPO_URL
+```
+
+---
+
+# ERROR 3
+# failed to push some refs
+
+Error:
 
 ```text
-How should histories be combined?
+failed to push some refs
 ```
+
+---
+
+# Cause
+
+Remote repository contains commits not available locally.
 
 ---
 
@@ -631,37 +601,7 @@ How should histories be combined?
 git pull origin main --allow-unrelated-histories --no-rebase
 ```
 
----
-
-# ERROR 8
-
-# non-fast-forward
-
-Error:
-
-```text
-non-fast-forward
-```
-
----
-
-# Meaning
-
-Remote branch is ahead of local branch.
-
-Git blocks push to prevent overwriting remote history.
-
----
-
-# Fix
-
-First pull latest changes:
-
-```bash
-git pull origin main --allow-unrelated-histories --no-rebase
-```
-
-Then push:
+Then:
 
 ```bash
 git push
@@ -669,47 +609,104 @@ git push
 
 ---
 
-# ERROR 9
+# ERROR 4
+# non-fast-forward
 
-# fatal: 'main' does not appear to be a git repository
+Meaning:
+
+```text
+Remote branch ahead of local branch.
+```
+
+Git blocks overwrite for safety.
+
+---
+
+# Fix
+
+```bash
+git pull
+git push
+```
+
+---
+
+# ERROR 5
+# divergent branches
+
+Meaning:
+
+```text
+Local and remote histories differ.
+```
+
+---
+
+# Fix
+
+```bash
+git pull origin main --allow-unrelated-histories --no-rebase
+```
+
+---
+
+# ERROR 6
+# Authentication failed
 
 Cause:
-
-Wrong command:
-
-```bash
-git push main
-```
-
-Git interprets:
-
-* main as remote repository name
+- wrong password
+- GitHub password used instead of token
 
 ---
 
-# Correct Command
+# Fix
 
-```bash
-git push origin main
-```
+Use:
+- Personal Access Token
+
+NOT:
+- GitHub account password
 
 ---
 
-# ERROR 10
+# ERROR 7
+# Permission denied (publickey)
 
+Cause:
+- SSH authentication issue
+
+---
+
+# Fix
+
+Either:
+- configure SSH keys
+OR
+- use HTTPS remote URL
+
+---
+
+# ERROR 8
+# nothing to commit, working tree clean
+
+Meaning:
+
+```text
+No new file changes detected.
+```
+
+Not an error.
+
+---
+
+# ERROR 9
 # Vim Editor Opens During Merge
 
-Example screen:
+Example:
 
 ```text
 Merge branch 'main'
 ```
-
----
-
-# Why It Happens
-
-Git opens editor for merge commit message.
 
 ---
 
@@ -729,68 +726,6 @@ Then type:
 
 Press Enter.
 
-Meaning:
-
-| Command | Meaning    |
-| ------- | ---------- |
-| w       | write/save |
-| q       | quit       |
-
----
-
-# Git Branch Understanding
-
-Branch means:
-
-```text
-Independent line of development.
-```
-
-Default branch usually:
-
-```text
-main
-```
-
----
-
-# Check Current Branch
-
-```bash
-git branch
-```
-
----
-
-# Check Git Status
-
-```bash
-git status
-```
-
-Very important troubleshooting command.
-
-Shows:
-
-* modified files
-* staged files
-* untracked files
-* branch information
-
----
-
-# View Commit History
-
-```bash
-git log
-```
-
-Compact view:
-
-```bash
-git log --oneline
-```
-
 ---
 
 # Undo Last Commit
@@ -801,7 +736,7 @@ Keep changes:
 git reset --soft HEAD~1
 ```
 
-Remove changes:
+Delete changes:
 
 ```bash
 git reset --hard HEAD~1
@@ -815,72 +750,51 @@ WARNING:
 
 ---
 
-# Clone Existing Repository
+# View File Differences
 
 ```bash
-git clone https://github.com/USERNAME/REPO.git
+git diff
 ```
-
----
-
-# Pull Latest Changes
-
-```bash
-git pull
-```
-
-Downloads latest remote changes.
-
----
-
-# Difference Between Pull and Push
-
-| Command  | Purpose          |
-| -------- | ---------------- |
-| git pull | download changes |
-| git push | upload changes   |
 
 ---
 
 # Real DevOps Usage of Git
 
 Git used for:
-
-* Kubernetes YAML
-* Jenkins pipelines
-* Dockerfiles
-* Terraform
-* Helm charts
-* Shell scripts
-* CI/CD pipelines
+- Kubernetes YAML
+- Terraform
+- Helm charts
+- Jenkinsfiles
+- Dockerfiles
+- CI/CD pipelines
+- Shell scripts
+- Ansible playbooks
 
 ---
 
 # Production Best Practices
 
-* commit frequently
-* write meaningful commit messages
-* pull before push
-* never hardcode secrets
-* use branches properly
-* review code before merging
+- commit frequently
+- use meaningful commit messages
+- pull before push
+- avoid committing secrets
+- use branches properly
+- review changes before pushing
 
 ---
 
 # Security Best Practices
 
 Never commit:
-
-* passwords
-* API keys
-* tokens
-* private keys
+- passwords
+- API keys
+- private keys
+- secrets
 
 Use:
-
-* .gitignore
-* secret managers
-* vault systems
+- .gitignore
+- vaults
+- secret managers
 
 ---
 
@@ -892,21 +806,25 @@ Distributed version control system.
 
 ---
 
-## Difference between Git and GitHub?
+## What is GitHub?
+
+Cloud platform hosting Git repositories.
+
+---
+
+## Difference Between Git and GitHub?
 
 Git:
-
-* version control tool
+- version control software
 
 GitHub:
-
-* cloud hosting platform for Git repositories
+- repository hosting platform
 
 ---
 
 ## What is Commit?
 
-Snapshot of project at specific time.
+Snapshot of project at specific point in time.
 
 ---
 
@@ -916,15 +834,13 @@ Independent line of development.
 
 ---
 
-## Difference Between Pull and Push?
+## Difference Between git pull and git fetch?
 
-Pull:
+git fetch:
+- downloads changes only
 
-* download remote changes
-
-Push:
-
-* upload local changes
+git pull:
+- downloads + merges changes
 
 ---
 
@@ -936,22 +852,17 @@ When Git cannot automatically combine changes.
 
 # Final Understanding
 
-Git is not just a tool.
-
-Git is:
-
-* collaboration system
-* version tracking engine
-* DevOps backbone
-* infrastructure management tool
-* CI/CD foundation
+Git is backbone of:
+- DevOps
+- CI/CD
+- Infrastructure as Code
+- Cloud Engineering
+- Platform Engineering
+- Modern Software Development
 
 Strong Git knowledge is mandatory for:
-
-* DevOps engineers
-* Linux administrators
-* Cloud engineers
-* SRE engineers
-* Platform engineers
-* Software developers
-
+- DevOps engineers
+- Linux administrators
+- SRE engineers
+- Platform engineers
+- Cloud engineers
